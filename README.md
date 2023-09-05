@@ -1,76 +1,79 @@
 # ASSIGNMENT-2-
 Nimesa Technology Pvt. Ltd
 
-package qsp;
-import java.util.Scanner;
 
-public class WeatherDataProgram {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+   
 
-        int option;
-        do {
-            printMenu();
-            option = scanner.nextInt();
+  import requests
 
-            switch (option) {
-                case 1:
-                    getTemperature();
-                    break;
-                case 2:
-                    getWindSpeed();
-                    break;
-                case 3:
-                    getPressure();
-                    break;
-                case 0:
-                    System.out.println("Terminating the program.");
-                    break;
-                default:
-                    System.out.println("Invalid option. Please select a valid option.");
-                    break;
-            }
-        } while (option != 0);
 
-        scanner.close();
-    }
+API_URL = "https://samples.openweathermap.org/data/2.5/forecast/hourly?q=London,us&appid=b6907d289e10d714a6e88b30761fae22"
 
-    public static void printMenu() {
-        System.out.println("\nMenu:");
-        System.out.println("1. Get Temperature");
-        System.out.println("2. Get Wind Speed");
-        System.out.println("3. Get Pressure");
-        System.out.println("0. Exit");
-        System.out.print("Select an option: ");
-    }
+def get_temperature(data, date_time):
+    for entry in data:
+        if entry['date_time'] == date_time:
+            return entry['temperature']
+    return None
 
-    public static void getTemperature() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter date with time: ");
-        String dateTime = scanner.nextLine();
-        System.out.println("Temperature for " + dateTime + ": 25°C"); // Example temperature value
+def get_wind_speed(data, date_time):
+    for entry in data:
+        if entry['date_time'] == date_time:
+            return entry['wind']['speed']
+    return None
 
-        scanner.close();
-    }
 
-    public static void getWindSpeed() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter date with time: ");
-        String dateTime = scanner.nextLine();
-        System.out.println("Wind Speed for " + dateTime + ": 10 m/s"); // Example wind speed value
+def get_pressure(data, date_time):
+    for entry in data:
+        if entry['date_time'] == date_time:
+            return entry['pressure']
+    return None
 
-        scanner.close();
-    }
 
-    public static void getPressure() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter date with time: ");
-        String dateTime = scanner.nextLine();
-        System.out.println("Pressure for " + dateTime + ": 1013 hPa"); // Example pressure value
+def main():
+    while True:
+        print("\nMenu:")
+        print("1. Get Temperature")
+        print("2. Get Wind Speed")
+        print("3. Get Pressure")
+        print("0. Exit")
 
-        scanner.close();
-    }
-}
+        choice = input("Enter your choice: ")
+
+        if choice == '1':
+            date_time = input("Enter the date and time (YYYY-MM-DD HH:MM): ")
+            temperature = get_temperature(data, date_time)
+            if temperature is not None:
+                print(f"Temperature at {date_time}: {temperature}°C")
+            else:
+                print("Data not available for the specified date and time.")
+        elif choice == '2':
+            date_time = input("Enter the date and time (YYYY-MM-DD HH:MM): ")
+            wind_speed = get_wind_speed(data, date_time)
+            if wind_speed is not None:
+                print(f"Wind Speed at {date_time}: {wind_speed} m/s")
+            else:
+                print("Data not available for the specified date and time.")
+        elif choice == '3':
+            date_time = input("Enter the date and time (YYYY-MM-DD HH:MM): ")
+            pressure = get_pressure(data, date_time)
+            if pressure is not None:
+                print(f"Pressure at {date_time}: {pressure} hPa")
+            else:
+                print("Data not available for the specified date and time.")
+        elif choice == '0':
+            print("Exiting program.")
+            break
+        else:
+            print("Invalid choice. Please enter a valid option.")
+
+
+if __name__ == "__main__":
+
+    data = [
+        {"date_time": "2019-03-30 12:00", "temperature": 278.76, "wind": {"speed": 5.2}, "pressure": 1021.88},
+
+    ]
+    main()
 
 
 

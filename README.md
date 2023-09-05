@@ -48,8 +48,6 @@ public class WeatherDataProgram {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter date with time: ");
         String dateTime = scanner.nextLine();
-
-    
         System.out.println("Temperature for " + dateTime + ": 25°C"); // Example temperature value
 
         scanner.close();
@@ -59,8 +57,6 @@ public class WeatherDataProgram {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter date with time: ");
         String dateTime = scanner.nextLine();
-
-        
         System.out.println("Wind Speed for " + dateTime + ": 10 m/s"); // Example wind speed value
 
         scanner.close();
@@ -70,9 +66,6 @@ public class WeatherDataProgram {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter date with time: ");
         String dateTime = scanner.nextLine();
-
-        // Here, you can implement logic to fetch pressure based on the input date and time.
-        // Replace the following line with your actual implementation.
         System.out.println("Pressure for " + dateTime + ": 1013 hPa"); // Example pressure value
 
         scanner.close();
